@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         :root {
-            --primary-dark: #1a237e;
+            --primary-dark: #8b0000;
             --primary-light: #303f9f;
             --accent: #ff6d00;
             --accent-light: #ff9e40;
@@ -291,6 +291,17 @@
         .floating {
             animation: float 3s ease-in-out infinite;
         }
+	
+.gallery-item video {
+    width: 100%;
+    height: auto;
+    max-height: 600px; /* 控制最大高度，可根据需要调整 */
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+   
     </style>
 </head>
 <body>
@@ -336,20 +347,15 @@
                 </div>
             </div>
 
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="情侣照片">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="婚礼场地">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="订婚戒指">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="浪漫时刻">
-                </div>
-            </div>
+        
+    
+       <div class="gallery-item">
+    <video controls>
+        <source src="6.22 陈忻磊 3d.mp4" type="video/mp4">
+        您的浏览器不支持HTML5视频标签。
+    </video>
+</div>
+	
 
             <div class="rsvp-form">
                 <h3 class="section-title">请回复</h3>
