@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电子婚宴请柬</title>
+
+  <!-- Font Awesome + 额外字体/样式 -->
+  <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://s2.ssl.qhres2.com/static/56662140ef7d5d03.css" rel="stylesheet" />
+
+  <!-- 粒子背景 -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <style>
+    :root {
+      --primary-dark: #8b0000;
+      --primary-light: #303f9f;
+      --accent: #ff6d00;
+      --accent-light: #ff9e40;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --text-dark: #212121;
+      --text-light: #757575;
+    }
+    /* ---------- 基础排版 ---------- */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-dark);
+      background-color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      background-color: var(--primary-dark);
+      z-index: -1;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    header { text-align: center; padding: 4rem 0; }
+    .couple-names {
+      font-size: 3.5rem; font-weight: 300; color: var(--white);
+      margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,.3);
+      position: relative; display: inline-block;
+    }
+    .couple-names::after {
+      content:''; position:absolute; bottom:-10px; left:50%;
+      transform:translateX(-50%); width:100px; height:3px;
+      background-color:var(--accent);
+    }
+    .wedding-date { font-size:1.5rem; color:var(--white); margin-bottom:2rem; letter-spacing:2px; }
+
+    /* ---------- 卡片/排版 ---------- */
+    .invitation-card {
+      background:var(--white); border-radius:8px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      padding:3rem; margin:2rem 0; position:relative; overflow:hidden;
+    }
+    .invitation-card::before {
+      content:''; position:absolute; top:0; left:0; width:5px; height:100%;
+      background:linear-gradient(to bottom,var(--accent),var(--accent-light));
+    }
+    .section-title {
+      font-size:2rem; color:var(--primary-dark);
+      margin-bottom:1.5rem; position:relative; padding-bottom:10px;
+    }
+    .section-title::after {
+      content:''; position:absolute; bottom:0; left:0; width:50px; height:3px; background:var(--accent);
+    }
+    .invitation-text { font-size:1.1rem; line-height:1.8; margin-bottom:2rem; }
+
+    .details-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem; margin:3rem 0;
+    }
+    .detail-card {
+      background:var(--light-gray); border-radius:6px; padding:1.5rem;
+      transition:.3s ease;
+    }
+    .detail-card:hover { transform:translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,.1); }
+    .detail-icon { font-size:2rem; color:var(--accent); margin-bottom:1rem; }
+    .detail-title { font-size:1.3rem; color:var(--primary-dark); margin-bottom:0.5rem; }
+    .detail-text { color:var(--text-light); }
+
+    /* ---------- 相册 ---------- */
+    .gallery-item { position:relative; overflow:hidden; border-radius:6px; aspect-ratio:4/3; }
+    .gallery-item video { width:100%; height:auto; max-height:600px; object-fit:cover; display:block; margin:0 auto; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; transition:.5s ease; }
+    .gallery-item:hover img { transform:scale(1.05); }
+
+    /* ---------- RSVP 表单 ---------- */
+    .rsvp-form { background:var(--light-gray); padding:2rem; border-radius:6px; margin-top:3rem; }
+    .form-group { margin-bottom:1.5rem; }
+    label { display:block; margin-bottom:.5rem; color:var(--primary-dark); font-weight:500; }
+    input,select,textarea {
+      width:100%; padding:.8rem; border:1px solid #ddd; border-radius:4px;
+      font-size:1rem; transition:border-color .3s;
+    }
+    input:focus,select:focus,textarea:focus { outline:none; border-color:var(--accent); }
+    .submit-btn {
+      background:linear-gradient(to right,var(--accent),var(--accent-light));
+      color:#fff; border:none; padding:1rem 2rem;
+      font-size:1rem; border-radius:4px; cursor:pointer; transition:.3s;
+    }
+    .submit-btn:hover { transform:translateY(-2px); box-shadow:0 5px 10px rgba(255,109,0,.3); }
+
+    /* ---------- 页脚 ---------- */
+    footer { text-align:center; padding:2rem 0; color:var(--white); background:var(--primary-dark); margin-top:3rem; }
+    .social-icons { display:flex; justify-content:center; gap:1.5rem; }
+    .social-icon { color:#fff; font-size:1.5rem; transition:color .3s; }
+    .social-icon:hover { color:var(--accent); }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width:768px){
+      .couple-names{font-size:2.5rem;}
+      .details-grid{grid-template-columns:1fr;}
+      .invitation-card{padding:2rem 1.5rem;}
+    }
+
+    /* ---------- 自定义动画 ---------- */
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+    .floating{animation:float 3s ease-in-out infinite;}
+  </style>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <header>
+      <h1 class="couple-names floating">陈忻磊 &amp; 许斐然</h1>
+      <p class="wedding-date">2025年08月29日 · 上海</p>
+    </header>
+
+    <!-- ====== 邀请卡片 ====== -->
+    <div class="invitation-card">
+      <h2 class="section-title">诚挚邀请</h2>
+      <p class="invitation-text">
+        亲爱的亲朋好友：<br /><br />
+        我们怀着无比喜悦的心情，邀请您参加我们的婚礼庆典，并诚挚地希望您能见证这一重要时刻。<br /><br />
+        婚礼将于 2025 年 08 月 29 日下午 18:30 在格乐利雅 galleria
+        艺术中心举行，随后 19:00 举行晚宴。您的到来将为我们的特殊日子增添无限光彩。
+      </p>
+
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+          <h3 class="detail-title">婚礼日期</h3>
+          <p class="detail-text">2025年08月29日<br />仪式 18:30<br />晚宴 19:00</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3 class="detail-title">婚礼地点</h3>
+          <p class="detail-text">格乐利雅 galleria 艺术中心<br />上海市静安区汶水路 40 号</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon"><i class="fas fa-hotel"></i></div>
+          <h3 class="detail-title">住宿安排</h3>
+          <p class="detail-text">我们为外地宾客预留了房间，请提前告知是否需要安排住宿。</p>
+        </div>
+      </div>
+
+      <!-- ====== 相册 / 视频示例 ====== -->
+      <div class="gallery-item">
+        <!-- 将视频放到无空格且 ASCII 命名的路径，或者外部托管（例如 Vercel Blob）后替换下面的 URL -->
+        <video controls>
+          <source src="https://your-project-name.vercel-storage.com/videos/wedding-video.mp4" type="video/mp4" />
+          您的浏览器不支持 HTML5 视频标签。
+        </video>
+      </div>
+
+      <!-- ====== RSVP 表单 ====== -->
+      <!-- 使用 Formspree 这类免后端服务来保存信息 -->
+      <div class="rsvp-form">
+        <h3 class="section-title">请回复</h3>
+        <p class="invitation-text">
+          请您于 2025 年 8 月 1 日前确认是否出席，以便我们做好安排。
+        </p>
+
+        <form id="rsvpForm" action="https://formspree.io/f/mdkzvgqo" method="POST">
+          <!-- 若想自定义邮件主题，可添加隐藏字段 <input type="hidden" name="_subject" value="婚礼 RSVP" /> -->
+          <div class="form-group">
+            <label for="name">您的姓名</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">联系电话</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+
+          <div class="form-group">
+            <label for="attendance">是否出席</label>
+            <select id="attendance" name="attendance" required>
+              <option value="">请选择</option>
+              <option value="yes">欣然参加</option>
+              <option value="no">遗憾不能参加</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guests">随行人数（包括您自己）</label>
+            <input type="number" id="guests" name="guests" min="1" value="1" />
+          </div>
+
+          <div class="form-group">
+            <label for="driving">是否开车</label>
+            <select id="driving" name="driving" required>
+              <option value="">请选择</option>
+              <option value="yes">是</option>
+              <option value="no">否</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-btn">确认回复</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <footer>
+    <p>期待与您共享这幸福时刻</p>
+    <p>陈忻磊 &amp; 许斐然</p>
+    <div class="social-icons">
+      <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+      <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <!-- ====== 前端脚本 ====== -->
+  <script>
+    // ---------- 粒子背景 ----------
+    document.addEventListener('DOMContentLoaded', function () {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: ['#ff6d00', '#ff9e40', '#ffffff'] },
+          shape: { type: 'circle', stroke: { width: 0, color: '#000' } },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: '#ff6d00', opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, out_mode: 'out' },
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
+          modes: { grab: { distance: 140, line_linked: { opacity: 1 } } },
+        },
+        retina_detect: true,
+      });
+    });
+  </script>
+</body>
+</html>
